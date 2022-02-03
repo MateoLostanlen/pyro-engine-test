@@ -13,27 +13,30 @@
 #	- if failure: reboot
 
 set -u
-echo $(date +"%H:%M:%S") >> '/home/pi/test.txt';
+
 PING_CMD=('ping' '-c' '1' '-W' '10' 'google.com')
 
 if "${PING_CMD[@]}";
 then
-    echo 'ok 1' >> '/home/pi/test.txt';
-    exit 0;
+    iplocalhostvpn=$(ifconfig tun0 | awk '/inet / {print $2}')
+    PING_CMD_VPN=('ping' '-c' '1' '-W' '10' "$iplocalhostvpn")
+    if "${PING_CMD_VPN[@]}";
+    then
+          exit 0;
+    fi;
+
+    sudo systemctl restart openvpn@client;
 fi;
 
-echo 'ko 1 restart vpn' >> '/home/pi/test.txt';
-
-sudo systemctl restart openvpn@client;
 sudo service networking restart;
 sleep 60;
 
-
 if "${PING_CMD[@]}";
 then
-    echo 'ok 2' >> '/home/pi/test.txt';
     exit 0;
 fi;
 
-echo 'ko 2 reboot' >> '/home/pi/test.txt';
+python3 /home/pi/pyro-engine/pyroengine/pi_utils/reboot_router;
+sleep 60;
+
 sudo reboot;
