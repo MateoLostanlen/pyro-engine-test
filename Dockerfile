@@ -1,7 +1,7 @@
 FROM pyronear/pyro-vision:latest1
 
 ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONDONTWRITEBYTECODE 2
 
 
 COPY ./requirements.txt /tmp/requirements.txt
