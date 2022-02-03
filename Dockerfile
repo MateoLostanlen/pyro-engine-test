@@ -1,4 +1,4 @@
-FROM pyronear/pyro-vision:latest
+FROM pyronear/pyro-vision:latest1
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
