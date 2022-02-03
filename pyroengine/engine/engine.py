@@ -45,7 +45,7 @@ class PyronearEngine:
     """
     def __init__(
         self,
-        detection_thresh: float = 0.5,
+        detection_thresh: float = 0.1,
         api_url: Optional[str] = None,
         client_creds: Optional[Dict[str, str]] = None,
         frame_saving_period: Optional[int] = None,
