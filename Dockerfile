@@ -1,4 +1,4 @@
-FROM pyronear/pyro-vision:latest
+FROM nelnatsol/pyrovision:latest
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
